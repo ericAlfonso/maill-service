@@ -17,6 +17,27 @@ spring:
   profiles:
     active: ${spring.profile:local}
 
+  mail:
+    host: ${EMAIL_HOST}
+    port: ${EMAIL_PORT}
+    username: ${EMAIL_ADDRESS}
+    password: ${EMAIL_PASSWORD}
+    default-encoding: UTF-8
+    properties:
+      mail:
+        mime:
+          chartset: UTF
+        smtp:
+          writetimeout: 10000
+          connectiontimeout: 10000
+          timeout: 10000
+          auth: true
+          starttls:
+            enabled: true
+            required: true
+    verify:
+      host: ${VERIFY_EMAIL_HOST}
+
 ---
 spring:
   config:
@@ -42,6 +63,12 @@ logging:
     org.springframework: ERROR
     api.ferreteria.authservice: ERROR
 
+#email config
+EMAIL_HOST: smtp.gmail.com
+EMAIL_PORT: 587
+EMAIL_ADDRESS: erictutorias@gmail.com
+EMAIL_PASSWORD: dkhtdtbhkypjdtvm
+VERIFY_EMAIL_HOST: http://localhost:8080
 ---
 spring:
   config:

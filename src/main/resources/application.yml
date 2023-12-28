@@ -1,0 +1,79 @@
+spring:
+  application:
+    name: mail-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 30000
+      minimum-idle: 2
+      idle-timeout: 30000
+      max-lifetime: 200000
+      connection-test-query: select 1
+  data:
+    jpa:
+      repositories:
+        enabled: true
+
+  profiles:
+    active: ${spring.profile:local}
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  datasource:
+    username: ${spring.username:root}
+    password: ${spring.password:Hermana123}
+    url: ${spring.url:jdbc:mysql://localhost:3306/mail}
+
+  jpa:
+    show-sql: true
+
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: "/"
+
+logging:
+  level:
+    org.springframework: ERROR
+    api.ferreteria.authservice: ERROR
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    username: ${spring.username}
+    password: ${spring.password}
+    url: ${spring.url}
+
+  springdoc:
+    swagger-ui:
+      enabled: true
+      path: "/dev"
+
+  jpa:
+    show-sql: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    username: ${spring.username}
+    password: ${spring.password}
+    url: ${spring.url}
+
+  springdoc:
+    swagger-ui:
+      enabled: true
+      path: "/prod"
+
